@@ -1,0 +1,23 @@
+ADD PARTICIPANT 0, Kiaan, Baba Farid University of Health Sciences
+ADD PARTICIPANT 1, Adah, TERI University
+ADD PARTICIPANT 2, Bhavya, Mangalayatan University
+ADD PARTICIPANT 3, Aarav, Jagan Nath University
+ADD EVENT 0, 430, 231
+ADD EVENT 1, 272, 364
+ADD 0, 1
+ADD 0, 0
+ADD 2, 1
+ADD 2, 0
+ADD 1, 0
+ADD 1, 1
+UPDATE SCORE 1, 0, 290
+UPDATE SCORE 0, 1, 214
+UPDATE SCORE 2, 0, 112
+DELETE EVENT PARTICIPANT 0, 0
+TOP3
+TOP3 IN EVENT 1
+
+1, Adah, TERI University, 0, 430, 290
+0, Kiaan, Baba Farid University of Health Sciences, 1, 272, 214
+2, Bhavya, Mangalayatan University, 0, 430, 112
+0, Kiaan, Baba Farid University of Health Sciences, 214

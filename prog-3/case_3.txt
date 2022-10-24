@@ -1,0 +1,28 @@
+ADD PARTICIPANT 0, Shanaya, Rani Channamma University
+ADD PARTICIPANT 1, Priyansh, Integral University
+ADD PARTICIPANT 2, Bhavin, Jamia Millia Islamia
+ADD PARTICIPANT 3, Vardaniya, Calorx Teachers University
+ADD PARTICIPANT 4, Anaya, Central Institute of Fisheries Education
+ADD EVENT 0, 80, 649
+ADD EVENT 1, 240, 48
+ADD 0, 1
+ADD 0, 0
+ADD 3, 1
+ADD 2, 1
+ADD 2, 0
+ADD 1, 1
+UPDATE SCORE 2, 0, 316
+UPDATE SCORE 0, 1, 974
+UPDATE SCORE 0, 1, 262
+DELETE EVENT 0
+TOP3
+TOP3 IN EVENT 1
+DELETE PARTICIPANT 0
+DELETE PARTICIPANT 1
+DELETE PARTICIPANT 2
+DELETE PARTICIPANT 3
+DELETE PARTICIPANT 4
+TOP3 IN EVENT 0
+
+0, Shanaya, Rani Channamma University, 1, 240, 262
+0, Shanaya, Rani Channamma University, 262
