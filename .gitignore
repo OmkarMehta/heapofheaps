@@ -1,5 +1,8 @@
 # Prerequisites
 *.d
+*.settings
+*.project
+*.classpath
 
 # Compiled Object files
 *.slo
@@ -33,3 +36,4 @@
 .DS_Store
 
 *.zip
+bin/**
