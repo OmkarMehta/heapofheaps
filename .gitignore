@@ -37,3 +37,4 @@
 
 *.zip
 bin/**
+.vscode/**
