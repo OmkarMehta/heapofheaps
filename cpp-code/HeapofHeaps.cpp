@@ -1,5 +1,6 @@
 using namespace std;
 #include "Event.h"
+#include "EventMaxHeap.h"
 
 class Entry1
 {
@@ -12,13 +13,16 @@ public:
         key = k;
         value = v;
     }
+    Entry1()
+    {
+    }
 };
 
 class HeapofHeaps
 {
 public:
     int MAX_HEAP_SIZE1 = 1000;
-    Entry1[] A;
+    Entry1 *A;
     int size;
     HeapofHeaps()
     {
