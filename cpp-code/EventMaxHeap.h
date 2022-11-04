@@ -123,21 +123,26 @@ void EventMaxHeap::downHeapBubble(int i)
 void EventMaxHeap::insert(int k, Participant v)
 {
   int Position = SearchInHeap(v);
-  // if (Position > 0)
-  // {
-  //   System.out.println("Exception");
-  //   throw new Exception();
-  // }
-  // else{
-  Entry E = Entry(k, v);
-  A[++size] = E;
-  upHeapBubble(size);
-  //}
+  if (Position > 0)
+  {
+    // System.out.println("Exception");
+    throw "Exception";
+  }
+  else
+  {
+    Entry E = Entry(k, v);
+    A[++size] = E;
+    upHeapBubble(size);
+  }
 }
 
 // This method implements the removeMax() operation
 Participant EventMaxHeap::removeMax()
 {
+  if (size == 0)
+  {
+    throw exception();
+  }
   Participant result = A[1].value;
   if (size == 1)
   {
@@ -157,16 +162,16 @@ Participant EventMaxHeap::removeMax()
 void EventMaxHeap::removeparticipant(Participant P)
 {
   int position = 0;
-  // try {
-  // 	position = SearchInHeap(P);
-  // } catch (Exception e) {
-  // 	// TODO Auto-generated catch block
-  // 	//e.printStackTrace();
-  // }
+  try
+  {
+    position = SearchInHeap(P);
+  }
+  catch (exception e)
+  {
+    cout << e.what() << endl;
+  }
   if (position > 0)
   {
-    /*A[position].key = A[size].key; A[position].value = A[size].value;
-    size--;*/
     swapVals(position, size);
     size--;
     downHeapBubble(position);
@@ -180,9 +185,7 @@ int EventMaxHeap::SearchInHeap(Participant P)
     if (P.participantID.compare(A[i].value.participantID) == 0)
       return i;
   }
-  // System.out.println("Exception");
-  // throw new Exception();
-  return 0;
+  throw new exception();
 }
 
 void EventMaxHeap::printArray()
@@ -207,40 +210,81 @@ void EventMaxHeap::TOP3INEVENT(EventMaxHeap temp)
   int first = temp.A[1].key;
   int PO = 0;
   Participant First = Participant("dummy");
-
-  First = temp.removeMax();
-  if (first != 0)
+  try
   {
-    First.Print();
-    cout << first << endl;
+    First = temp.removeMax();
+    if (first != 0)
+    {
+      First.Print();
+      cout << first << endl;
+    }
+  }
+  catch (exception e)
+  {
+    PO = 1;
+    return;
   }
 
   // First Participant Found
   Participant Second = Participant("dummy"), Third = Participant("dummy1");
   int second = 0, third = 0;
   second = temp.A[1].key;
-
-  Second = temp.removeMax();
-  if (second != 0)
+  try
   {
-    Second.Print();
-    cout << second << endl;
+    Second = temp.removeMax();
+    if (second != 0)
+    {
+      Second.Print();
+      cout << second << endl;
+    }
+  }
+  catch (exception e)
+  {
+    PO = 1;
+    try
+    {
+      temp.insert(first, First);
+    }
+    catch (exception e1)
+    {
+    }
+    return;
   }
 
   third = temp.A[1].key;
-
-  Third = temp.removeMax();
-  if (third != 0)
+  try
   {
-    Third.Print();
-    cout << third << endl;
+    Third = temp.removeMax();
+    if (third != 0)
+    {
+      Third.Print();
+      cout << third << endl;
+    }
+  }
+  catch (exception e)
+  {
+    PO = 1;
+    try
+    {
+      temp.insert(first, First);
+      temp.insert(second, Second);
+      return;
+    }
+    catch (exception e1)
+    {
+    }
   }
 
   if (PO == 0)
   {
-
-    temp.insert(first, First);
-    temp.insert(second, Second);
-    temp.insert(third, Third);
+    try
+    {
+      temp.insert(first, First);
+      temp.insert(second, Second);
+      temp.insert(third, Third);
+    }
+    catch (exception e)
+    {
+    }
   }
 }
