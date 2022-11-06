@@ -46,7 +46,7 @@ public:
     // This is the max() method that returns the maximum element in the heap of heaps
     Event * max()
     {
-        return A[1].value[0];
+        return A[1].value;
     }
 
     // This method returns whether the heap is empty or not
@@ -200,7 +200,7 @@ public:
     {
         for (int i = 1; i <= size; i++)
         {
-            if (A[i].value.eventID == P.eventID)
+            if (A[i].value->eventID == P->eventID)
             {
                 return i;
             }
@@ -213,7 +213,7 @@ public:
     {
         for (int i = 1; i <= size; i++)
         {
-            if (A[i].value.eventID == P.eventID)
+            if (A[i].value->eventID == P->eventID)
             {
                 return i;
             }
@@ -236,7 +236,7 @@ public:
         }
         if (EventPosition > 0)
         {
-            A[EventPosition].A.removeparticipant(P1);
+            A[EventPosition].A->removeparticipant(P1);
             UpdateKey(E1);
             downHeapBubble(EventPosition);
         }
@@ -247,7 +247,7 @@ public:
     {
         for (int i = 1; i <= size; i++)
         {
-            A[i].A.removeparticipant(P);
+            A[i].A->removeparticipant(P);
         }
     }
 
@@ -255,7 +255,7 @@ public:
     {
         for (int i = 1; i <= size; i++)
         {
-            cout << "(" << A[i].key << ", " << A[i].value.eventID << ", " << A[i].value.eventName << ", " << A[i].value.eventDescription << "), ";
+            cout << "(" << A[i].key << ", " << A[i].value->eventID << ", " << A[i].value->eventName << ", " << A[i].value->eventDescription << "), ";
         }
         cout << endl;
     }
@@ -268,12 +268,12 @@ public:
         Event *FEvent = A[1].value;
         try
         {
-            First = A[1].A.removeMax();
+            First = A[1].A->removeMax();
             UpdateKey(A[1].value);
             if (first != 0)
             {
-                First.Print();
-                cout << A[1].value.eventID << ", " << A[1].value.eventName << ", " << first;
+                First->Print();
+                cout << A[1].value->eventID << ", " << A[1].value->eventName << ", " << first;
             }
         }
         catch (const char *msg)
@@ -290,12 +290,12 @@ public:
         second = A[1].key;
         try
         {
-            Second = A[1].A.removeMax();
+            Second = A[1].A->removeMax();
             UpdateKey(A[1].value);
             if (second != 0)
             {
-                Second.Print();
-                cout << A[1].value.eventID << ", " << A[1].value.eventName << ", " << second;
+                Second->Print();
+                cout << A[1].value->eventID << ", " << A[1].value->eventName << ", " << second;
             }
         }
         catch (const char *msg)
@@ -311,7 +311,7 @@ public:
             }
             try
             {
-                A[FEventPosition].A.insert(first, First);
+                A[FEventPosition].A->insert(first, First);
             }
             catch (const char *msg)
             {
@@ -331,11 +331,11 @@ public:
         Event *TEvent = A[1].value;
         try
         {
-            Third = A[1].A.removeMax();
+            Third = A[1].A->removeMax();
             if (third != 0)
             {
-                Third.Print();
-                cout << A[1].value.eventID << ", " << A[1].value.eventName << ", " << third;
+                Third->Print();
+                cout << A[1].value->eventID << ", " << A[1].value->eventName << ", " << third;
             }
         }
         catch (const char *msg)
@@ -354,7 +354,7 @@ public:
             }
             try
             {
-                A[FEventPosition].A.insert(first, First);
+                A[FEventPosition].A->insert(first, First);
             }
             catch (const char *msg)
             {
@@ -370,7 +370,7 @@ public:
             }
             try
             {
-                A[SEventPosition].A.insert(second, Second);
+                A[SEventPosition].A->insert(second, Second);
             }
             catch (const char *msg)
             {
@@ -386,7 +386,7 @@ public:
         {
             try
             {
-                A[1].A.insert(third, Third);
+                A[1].A->insert(third, Third);
             }
             catch (const char *msg)
             {
@@ -404,7 +404,7 @@ public:
             }
             try
             {
-                A[FEventPosition].A.insert(first, First);
+                A[FEventPosition].A->insert(first, First);
             }
             catch (const char *msg)
             {
@@ -423,7 +423,7 @@ public:
             }
             try
             {
-                A[SEventPosition].A.insert(second, Second);
+                A[SEventPosition].A->insert(second, Second);
             }
             catch (const char *msg)
             {
@@ -434,4 +434,4 @@ public:
             upHeapBubble(SEventPosition);
         }
     }
-}
+};

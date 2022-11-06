@@ -4,9 +4,8 @@ using namespace std;
 
 class Event
 {
-  string eventID, eventName, eventDescription;
-
 public:
+  string eventID, eventName, eventDescription;
   Event(string x, string y, string z);
   Event(string x);
 };

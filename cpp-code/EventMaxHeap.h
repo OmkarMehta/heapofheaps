@@ -29,16 +29,16 @@ public:
   // This is the initialization method for the array based max-heap implementation
   EventMaxHeap();
   void swapVals(int p, int q);
-  Participant max();
+  Participant* max();
   bool isEmpty();
   void upHeapBubble(int i);
   void downHeapBubble(int i);
   void insert(int k, Participant *v);
-  Participant removeMax();
-  void removeparticipant(Participant P);
-  int SearchInHeap(Participant P);
+  Participant* removeMax();
+  void removeparticipant(Participant* P);
+  int SearchInHeap(Participant* P);
   void printArray();
-  void UpdateScore(int key, Participant P);
+  void UpdateScore(int key, Participant* P);
   void TOP3INEVENT(EventMaxHeap temp);
 };
 
@@ -60,7 +60,7 @@ void EventMaxHeap::swapVals(int p, int q)
 }
 
 // This is the max() method that returns the maximum element in the heap
-Participant EventMaxHeap::max()
+Participant* EventMaxHeap::max()
 {
   return (A[1].value);
 }
@@ -122,7 +122,7 @@ void EventMaxHeap::downHeapBubble(int i)
 
 void EventMaxHeap::insert(int k, Participant *v)
 {
-  int Position = SearchInHeap(v[0]);
+  int Position = SearchInHeap(v);
   if (Position > 0)
   {
     // System.out.println("Exception");
@@ -137,13 +137,13 @@ void EventMaxHeap::insert(int k, Participant *v)
 }
 
 // This method implements the removeMax() operation
-Participant EventMaxHeap::removeMax()
+Participant* EventMaxHeap::removeMax()
 {
   if (size == 0)
   {
     throw exception();
   }
-  Participant result = A[1].value;
+  Participant* result = A[1].value;
   if (size == 1)
   {
     A[1].key = (int)0;
@@ -159,7 +159,7 @@ Participant EventMaxHeap::removeMax()
 }
 
 // This method just prints the array storing the heap
-void EventMaxHeap::removeparticipant(Participant P)
+void EventMaxHeap::removeparticipant(Participant *P)
 {
   int position = 0;
   try
@@ -178,11 +178,11 @@ void EventMaxHeap::removeparticipant(Participant P)
   }
 }
 
-int EventMaxHeap::SearchInHeap(Participant P)
+int EventMaxHeap::SearchInHeap(Participant* P)
 {
   for (int i = 1; i <= size; i++)
   {
-    if (P.participantID.compare(A[i].value.participantID) == 0)
+    if (P->participantID.compare(A[i].value->participantID) == 0)
       return i;
   }
   throw new exception();
@@ -192,12 +192,12 @@ void EventMaxHeap::printArray()
 {
   for (int i = 1; i <= size; ++i)
   {
-    cout << "(" << A[i].key << ", " << A[i].value.participantID << "), ";
+    cout << "(" << A[i].key << ", " << A[i].value->participantID << "), ";
   }
   cout << endl;
 }
 
-void EventMaxHeap::UpdateScore(int key, Participant P)
+void EventMaxHeap::UpdateScore(int key, Participant* P)
 {
   int Position = SearchInHeap(P);
   A[Position].key = key;
@@ -243,7 +243,7 @@ void EventMaxHeap::TOP3INEVENT(EventMaxHeap temp)
     PO = 1;
     try
     {
-      temp.insert(first, First);
+      temp.insert(first, &First);
     }
     catch (exception e1)
     {
@@ -266,8 +266,8 @@ void EventMaxHeap::TOP3INEVENT(EventMaxHeap temp)
     PO = 1;
     try
     {
-      temp.insert(first, First);
-      temp.insert(second, Second);
+      temp.insert(first, &First);
+      temp.insert(second, &Second);
       return;
     }
     catch (exception e1)
@@ -279,9 +279,9 @@ void EventMaxHeap::TOP3INEVENT(EventMaxHeap temp)
   {
     try
     {
-      temp.insert(first, First);
-      temp.insert(second, Second);
-      temp.insert(third, Third);
+      temp.insert(first, &First);
+      temp.insert(second, &Second);
+      temp.insert(third, &Third);
     }
     catch (exception e)
     {
