@@ -46,7 +46,7 @@ public:
     // This is the max() method that returns the maximum element in the heap of heaps
     Event * max()
     {
-        return A[1].value;
+        return A[1].value[0];
     }
 
     // This method returns whether the heap is empty or not

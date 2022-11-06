@@ -6,14 +6,14 @@ using namespace std;
 class Entry
 {
 public:
-  int key;           // This denotes the key of the entry stored at the node
-  Participant value; // This denotes the value of the entry stored at the node
-  Entry(int k, Participant v);
+  int key;            // This denotes the key of the entry stored at the node
+  Participant *value; // This denotes the value of the entry stored at the node
+  Entry(int k, Participant *v);
   Entry();
 };
 Entry::Entry() {}
 
-Entry::Entry(int k, Participant v)
+Entry::Entry(int k, Participant *v)
 {
   key = k;
   value = v;
@@ -33,7 +33,7 @@ public:
   bool isEmpty();
   void upHeapBubble(int i);
   void downHeapBubble(int i);
-  void insert(int k, Participant * v);
+  void insert(int k, Participant *v);
   Participant removeMax();
   void removeparticipant(Participant P);
   int SearchInHeap(Participant P);
@@ -51,7 +51,7 @@ EventMaxHeap::EventMaxHeap()
 // This method swaps the key-value pairs stored at given indices in the array A
 void EventMaxHeap::swapVals(int p, int q)
 {
-  Participant temp1 = A[p].value;
+  Participant *temp1 = A[p].value;
   int temp2 = A[p].key;
   A[p].key = A[q].key;
   A[p].value = A[q].value;
@@ -120,9 +120,9 @@ void EventMaxHeap::downHeapBubble(int i)
   }
 }
 
-void EventMaxHeap::insert(int k, Participant * v)
+void EventMaxHeap::insert(int k, Participant *v)
 {
-  int Position = SearchInHeap(v);
+  int Position = SearchInHeap(v[0]);
   if (Position > 0)
   {
     // System.out.println("Exception");
