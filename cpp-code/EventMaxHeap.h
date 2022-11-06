@@ -33,7 +33,7 @@ public:
   bool isEmpty();
   void upHeapBubble(int i);
   void downHeapBubble(int i);
-  void insert(int k, Participant v);
+  void insert(int k, Participant * v);
   Participant removeMax();
   void removeparticipant(Participant P);
   int SearchInHeap(Participant P);
@@ -120,7 +120,7 @@ void EventMaxHeap::downHeapBubble(int i)
   }
 }
 
-void EventMaxHeap::insert(int k, Participant v)
+void EventMaxHeap::insert(int k, Participant * v)
 {
   int Position = SearchInHeap(v);
   if (Position > 0)

@@ -130,7 +130,7 @@ public:
         {
             cout << msg << endl;
         }
-        O.removeparticipant(P);
+        O->removeparticipant(P);
         Entry1 *E = new Entry1(k, v);
         A[++size] = E;
         A[size].A = O;
@@ -149,7 +149,7 @@ public:
         {
             cout << msg << endl;
         }
-        A[Position].key = A[Position].A.A[1].key;
+        A[Position].key = A[Position].A->A[1].key;
     }
 
     // This method removes the maximum element from the heap of heaps
