@@ -1,7 +1,7 @@
-using namespace std;
+
 #include "Event.h"
 #include "EventMaxHeap.h"
-
+using namespace std;
 class Entry1
 {
 public:
@@ -21,7 +21,7 @@ public:
 class HeapofHeaps
 {
 public:
-    int MAX_HEAP_SIZE1 = 1000;
+    const int MAX_HEAP_SIZE1 = 1000;
     Entry1 *A;
     int size;
     HeapofHeaps()
@@ -44,7 +44,7 @@ public:
     }
 
     // This is the max() method that returns the maximum element in the heap of heaps
-    Event max()
+    Event * max()
     {
         return A[1].value;
     }
