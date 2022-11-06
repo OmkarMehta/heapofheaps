@@ -44,7 +44,7 @@ public:
     }
 
     // This is the max() method that returns the maximum element in the heap of heaps
-    Event * max()
+    Event *max()
     {
         return A[1].value;
     }
@@ -115,6 +115,7 @@ public:
     void insert(int k, Event *v)
     {
         int position = SearchInHeap1(v);
+        // cout << "Position in Heap " << position << endl;
         if (position > 0)
         {
             // throw exception

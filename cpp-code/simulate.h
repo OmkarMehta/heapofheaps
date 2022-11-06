@@ -3,8 +3,26 @@
 #include <sstream>
 #include <vector>
 #include "Event.h"
+#include "EventMaxHeap.h"
+#include "HeapofHeaps.h"
+#include "Participant.h"
 
 using namespace std;
+
+int EventCount = 0;
+int ParticipantCount = 0;
+
+int SearchParticipant(string s, Participant *P)
+{
+  for (int i = 1; i <= ParticipantCount; i++)
+  {
+    if (P[i].participantID == s)
+    {
+      return i;
+    }
+  }
+  return 0;
+}
 
 string *Analyze(char *input)
 {

@@ -1,7 +1,7 @@
 SRC_DIR = .
 
-# SRC_FILES := $(wildcard $(SRC_DIR)/*.cpp)
-SRC_FILES := simulate.cpp
+SRC_FILES := $(wildcard $(SRC_DIR)/*.cpp)
+# SRC_FILES := simulate.cpp
 OBJS := $(patsubst $(SRC_DIR)/%.cpp,%.o,$(SRC_FILES))
 EXE = main.exe
 

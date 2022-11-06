@@ -23,21 +23,22 @@ class EventMaxHeap
 {
 public:
   static const int MAX_HEAP_SIZE = (int)1E6; // This indicates the maximum size the heap can grow into.
-  Entry *A; // This is the array of references to entries
-  int size; // This is the number of current entries in the heap
+  Entry *A;                                  // This is the array of references to entries
+  int size;                                  // This is the number of current entries in the heap
   // This is the initialization method for the array based max-heap implementation
   EventMaxHeap();
   void swapVals(int p, int q);
-  Participant* max();
+  Participant *max();
   bool isEmpty();
   void upHeapBubble(int i);
   void downHeapBubble(int i);
   void insert(int k, Participant *v);
-  Participant* removeMax();
-  void removeparticipant(Participant* P);
-  int SearchInHeap(Participant* P);
+  Participant *removeMax();
+  void removeparticipant(Participant *P);
+  int SearchInHeap(Participant *P);
+  int SearchInHeap1(Participant *P);
   void printArray();
-  void UpdateScore(int key, Participant* P);
+  void UpdateScore(int key, Participant *P);
   void TOP3INEVENT(EventMaxHeap temp);
 };
 
@@ -59,7 +60,7 @@ void EventMaxHeap::swapVals(int p, int q)
 }
 
 // This is the max() method that returns the maximum element in the heap
-Participant* EventMaxHeap::max()
+Participant *EventMaxHeap::max()
 {
   return (A[1].value);
 }
@@ -121,10 +122,11 @@ void EventMaxHeap::downHeapBubble(int i)
 
 void EventMaxHeap::insert(int k, Participant *v)
 {
-  int Position = SearchInHeap(v);
+  int Position = SearchInHeap1(v);
+  cout << "  " << endl;
   if (Position > 0)
   {
-    // System.out.println("Exception");
+    cout << "Exception in " << __FILE__ << " at line " << __LINE__ << endl;
     throw "Exception";
   }
   else
@@ -136,13 +138,14 @@ void EventMaxHeap::insert(int k, Participant *v)
 }
 
 // This method implements the removeMax() operation
-Participant* EventMaxHeap::removeMax()
+Participant *EventMaxHeap::removeMax()
 {
   if (size == 0)
   {
+    cout << "Exception in " << __FILE__ << " at line " << __LINE__ << endl;
     throw exception();
   }
-  Participant* result = A[1].value;
+  Participant *result = A[1].value;
   if (size == 1)
   {
     A[1].key = (int)0;
@@ -177,14 +180,29 @@ void EventMaxHeap::removeparticipant(Participant *P)
   }
 }
 
-int EventMaxHeap::SearchInHeap(Participant* P)
+int EventMaxHeap::SearchInHeap(Participant *P)
 {
+  // cout << "Reached here" << endl;
+  // cout << size << endl;
   for (int i = 1; i <= size; i++)
   {
+
     if (P->participantID.compare(A[i].value->participantID) == 0)
       return i;
   }
+  cout << "Exception in " << __FILE__ << " at line " << __LINE__ << endl;
   throw new exception();
+}
+
+int EventMaxHeap::SearchInHeap1(Participant *P)
+{
+  for (int i = 1; i <= size; i++)
+  {
+    cout << P->participantID << "\t" << A[i].value->participantID << endl;
+    if (P->participantID.compare(A[i].value->participantID) == 0)
+      return i;
+  }
+  return 0;
 }
 
 void EventMaxHeap::printArray()
@@ -196,7 +214,7 @@ void EventMaxHeap::printArray()
   cout << endl;
 }
 
-void EventMaxHeap::UpdateScore(int key, Participant* P)
+void EventMaxHeap::UpdateScore(int key, Participant *P)
 {
   int Position = SearchInHeap(P);
   A[Position].key = key;
@@ -208,7 +226,7 @@ void EventMaxHeap::TOP3INEVENT(EventMaxHeap temp)
 {
   int first = temp.A[1].key;
   int PO = 0;
-  Participant * First = new Participant("dummy");
+  Participant *First = new Participant("dummy");
   try
   {
     First = temp.removeMax();
@@ -225,8 +243,8 @@ void EventMaxHeap::TOP3INEVENT(EventMaxHeap temp)
   }
 
   // First Participant Found
-  Participant* Second = new Participant("dummy");
-  Participant* Third = new Participant("dummy1");
+  Participant *Second = new Participant("dummy");
+  Participant *Third = new Participant("dummy1");
   int second = 0, third = 0;
   second = temp.A[1].key;
   try

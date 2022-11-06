@@ -39,3 +39,4 @@
 *.zip
 bin/**
 .vscode/**
+cpp-code/simulate.dSYM/**
