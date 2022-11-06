@@ -21,9 +21,8 @@ Entry::Entry(int k, Participant *v)
 
 class EventMaxHeap
 {
-private:
-  const int MAX_HEAP_SIZE = (int)1E6; // This indicates the maximum size the heap can grow into.
 public:
+  static const int MAX_HEAP_SIZE = (int)1E6; // This indicates the maximum size the heap can grow into.
   Entry *A; // This is the array of references to entries
   int size; // This is the number of current entries in the heap
   // This is the initialization method for the array based max-heap implementation
@@ -209,13 +208,13 @@ void EventMaxHeap::TOP3INEVENT(EventMaxHeap temp)
 {
   int first = temp.A[1].key;
   int PO = 0;
-  Participant First = Participant("dummy");
+  Participant * First = new Participant("dummy");
   try
   {
     First = temp.removeMax();
     if (first != 0)
     {
-      First.Print();
+      First->Print();
       cout << first << endl;
     }
   }
@@ -226,7 +225,8 @@ void EventMaxHeap::TOP3INEVENT(EventMaxHeap temp)
   }
 
   // First Participant Found
-  Participant Second = Participant("dummy"), Third = Participant("dummy1");
+  Participant* Second = new Participant("dummy");
+  Participant* Third = new Participant("dummy1");
   int second = 0, third = 0;
   second = temp.A[1].key;
   try
@@ -234,7 +234,7 @@ void EventMaxHeap::TOP3INEVENT(EventMaxHeap temp)
     Second = temp.removeMax();
     if (second != 0)
     {
-      Second.Print();
+      Second->Print();
       cout << second << endl;
     }
   }
@@ -243,7 +243,7 @@ void EventMaxHeap::TOP3INEVENT(EventMaxHeap temp)
     PO = 1;
     try
     {
-      temp.insert(first, &First);
+      temp.insert(first, First);
     }
     catch (exception e1)
     {
@@ -257,7 +257,7 @@ void EventMaxHeap::TOP3INEVENT(EventMaxHeap temp)
     Third = temp.removeMax();
     if (third != 0)
     {
-      Third.Print();
+      Third->Print();
       cout << third << endl;
     }
   }
@@ -266,8 +266,8 @@ void EventMaxHeap::TOP3INEVENT(EventMaxHeap temp)
     PO = 1;
     try
     {
-      temp.insert(first, &First);
-      temp.insert(second, &Second);
+      temp.insert(first, First);
+      temp.insert(second, Second);
       return;
     }
     catch (exception e1)
@@ -279,9 +279,9 @@ void EventMaxHeap::TOP3INEVENT(EventMaxHeap temp)
   {
     try
     {
-      temp.insert(first, &First);
-      temp.insert(second, &Second);
-      temp.insert(third, &Third);
+      temp.insert(first, First);
+      temp.insert(second, Second);
+      temp.insert(third, Third);
     }
     catch (exception e)
     {

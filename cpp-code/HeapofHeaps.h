@@ -21,7 +21,7 @@ public:
 class HeapofHeaps
 {
 public:
-    const int MAX_HEAP_SIZE1 = 1000;
+    static const int MAX_HEAP_SIZE1 = 1000;
     Entry1 *A;
     int size;
     HeapofHeaps()
@@ -131,7 +131,7 @@ public:
             cout << msg << endl;
         }
         O->removeparticipant(P);
-        Entry1 *E = new Entry1(k, v);
+        Entry1 E = Entry1(k, v);
         A[++size] = E;
         A[size].A = O;
         upHeapBubble(size);
