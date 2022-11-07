@@ -127,6 +127,7 @@ void EventMaxHeap::insert(int k, Participant *v)
   if (Position > 0)
   {
     cout << "Exception in " << __FILE__ << " at line " << __LINE__ << endl;
+    cout << "Participant already exists in the event" << endl;
     throw "Exception";
   }
   else
