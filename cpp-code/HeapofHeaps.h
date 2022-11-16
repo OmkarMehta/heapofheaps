@@ -263,6 +263,7 @@ public:
 
     void TOP3()
     {
+        cout << "Top3 of HeapofHeaps:" << endl;
         int first = A[1].key;
         int PO = 0;
         Participant *First = new Participant("Dummy");
@@ -273,8 +274,8 @@ public:
             UpdateKey(A[1].value);
             if (first != 0)
             {
-                First->Print();
-                cout << A[1].value->eventID << ", " << A[1].value->eventName << ", " << first;
+                First->PrintForTOP3();
+                cout << A[1].value->eventID << ", " << A[1].value->eventName << ", " << first<<endl;
             }
         }
         catch (const char *msg)
@@ -295,8 +296,8 @@ public:
             UpdateKey(A[1].value);
             if (second != 0)
             {
-                Second->Print();
-                cout << A[1].value->eventID << ", " << A[1].value->eventName << ", " << second;
+                Second->PrintForTOP3();
+                cout << A[1].value->eventID << ", " << A[1].value->eventName << ", " << second << endl;
             }
         }
         catch (const char *msg)
@@ -335,8 +336,8 @@ public:
             Third = A[1].A->removeMax();
             if (third != 0)
             {
-                Third->Print();
-                cout << A[1].value->eventID << ", " << A[1].value->eventName << ", " << third;
+                Third->PrintForTOP3();
+                cout << A[1].value->eventID << ", " << A[1].value->eventName << ", " << third << endl;
             }
         }
         catch (const char *msg)

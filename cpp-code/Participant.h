@@ -13,6 +13,7 @@ public:
   Participant(string x);
   Participant();
   void Print();
+  void PrintForTOP3();
 };
 
 Participant::Participant() {}
@@ -34,4 +35,9 @@ Participant::Participant(string x)
 void Participant::Print()
 {
   cout << participantID << ", " << participantName << ", " << universityName << ", " << endl;
+}
+
+void Participant::PrintForTOP3()
+{
+  cout << participantID << ", " << participantName << ", " << universityName << ", ";
 }

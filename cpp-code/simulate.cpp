@@ -100,12 +100,15 @@ int main()
           cout << "Reached TOP3: Event Position in Heap: " << EventPosition << endl;
           if (EventPosition > 0)
           {
+            cout<<"Top3 in Event: " << output[3] << endl;
             A.A[EventPosition].A->TOP3INEVENT(*(A.A[EventPosition].A));
+            cout << endl;
           }
         }
         else
         {
           A.TOP3();
+          cout << endl;
         } 
       }
 
