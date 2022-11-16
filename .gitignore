@@ -41,3 +41,4 @@ bin/**
 .vscode/**
 cpp-code/simulate.dSYM/**
 *.log
+simulate

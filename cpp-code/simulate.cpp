@@ -47,9 +47,9 @@ int main()
           cout << "Reached 2: ParticipantPosition: " << ParticipantPosition << endl;
           if (ParticipantPosition > 0)
           {
-            Participant P3 = P[ParticipantPosition];
-            // Print P3 
-            cout << "P3: " << P3.participantID << ", " << P3.participantName << ", " << P3.universityName << endl;
+            // Participant P3 = P[ParticipantPosition];
+            // // Print P3 
+            // cout << "P3: " << P3.participantID << ", " << P3.participantName << ", " << P3.universityName << endl;
             cout << "Reached 3" << endl;
             Event E = Event(output[2]);
             cout << "Reached 4" << endl;
@@ -61,7 +61,7 @@ int main()
               cout << "Reached 6" << endl;
               // Print the participants in the event of maxofmaxheap
               A.A[EventPosition].A->printArray();
-              A.A[EventPosition].A->insert(0, &P3); // Insert Participant in Event. 
+              A.A[EventPosition].A->insert(0, &P[ParticipantPosition]); // Insert Participant in Event. 
               A.A[EventPosition].A->printArray();
             }
             cout << "Reached 7" << endl;
