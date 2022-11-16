@@ -67,6 +67,9 @@ int main()
             cout << "Reached 7" << endl;
           }
         }
+      } 
+      else if (output[0] == "UPDATE") {
+        
       }
 
       delete[] array;
@@ -76,7 +79,7 @@ int main()
   cout << "Heap of Heaps" << endl;
   A.printArray();
   cout << "Events" << endl;
-  for (int i = 1; i < EventCount; i++)
+  for (int i = 1; i <= EventCount; i++)
   {
     A.A[i].A->printArray();
     cout << endl;
