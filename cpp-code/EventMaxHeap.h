@@ -123,7 +123,7 @@ void EventMaxHeap::downHeapBubble(int i)
 void EventMaxHeap::insert(int k, Participant *v)
 {
   int Position = SearchInHeap1(v);
-  cout << "Position is " << Position << endl;
+  // cout << "Position is " << Position << endl;
   if (Position > 0)
   {
     cout << "Exception in " << __FILE__ << " at line " << __LINE__ << endl;
@@ -199,7 +199,7 @@ int EventMaxHeap::SearchInHeap1(Participant *P)
 {
   for (int i = 1; i <= size; i++)
   {
-    cout << P->participantID << "\t" << A[i].value->participantID << endl;
+    // cout << P->participantID << "\t" << A[i].value->participantID << endl;
     if (P->participantID.compare(A[i].value->participantID) == 0)
       return i;
   }

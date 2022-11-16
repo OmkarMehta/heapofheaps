@@ -76,14 +76,10 @@ int main()
         cout << "Reached 2: ParticipantPosition: " << ParticipantPosition << endl;
         if (ParticipantPosition > 0)
         {
-          // Participant P3 = P[ParticipantPosition];
-          // // Print P3 
-          // cout << "P3: " << P3.participantID << ", " << P3.participantName << ", " << P3.universityName << endl;
-          cout << "Reached 3" << endl;
           Event E = Event(output[3]);
           int EventPosition =0;
           EventPosition = A.SearchInHeap(&E);
-          cout << "Reached Update: Event Position in Heap: " << EventPosition << endl;
+          // cout << "Reached Update: Event Position in Heap: " << EventPosition << endl;
           if (EventPosition > 0)
           {
             A.A[EventPosition].A->UpdateScore(stoi(output[4]), &P[ParticipantPosition]);
@@ -92,6 +88,25 @@ int main()
           A.downHeapBubble(EventPosition);
 				  A.upHeapBubble(EventPosition);
         }
+      }
+      else if (output[0] == "TOP3")
+      {
+        // check if IN and EVENT exists
+        if (output[1] == "IN" && output[2] == "EVENT") 
+        {
+          Event E = Event(output[3]);
+          int EventPosition =0;
+          EventPosition = A.SearchInHeap(&E);
+          cout << "Reached TOP3: Event Position in Heap: " << EventPosition << endl;
+          if (EventPosition > 0)
+          {
+            A.A[EventPosition].A->TOP3INEVENT(*(A.A[EventPosition].A));
+          }
+        }
+        else
+        {
+          A.TOP3();
+        } 
       }
 
       delete[] array;
