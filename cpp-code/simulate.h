@@ -75,7 +75,18 @@ string *Analyze(char *input)
         // cout << out[2] << " XXXX " << out[3] << endl;
         return out;
       }
+      else if (strcmp(split1, "DELETE") == 0 && strcmp(split2, "EVENT") == 0 && strcmp(split2, "PARTICIPANT") == 0)
+      {
+        out[2] = strtok(NULL, ", ");
+        out[3] = strtok(NULL, ", ");
+        return out;
+      }
       else if (strcmp(split1, "DELETE") == 0 && strcmp(split2, "PARTICIPANT") == 0)
+      {
+        out[2] = strtok(NULL, ", ");
+        return out;
+      } 
+      else if (strcmp(split1, "DELETE") == 0 && strcmp(split2, "EVENT") == 0)
       {
         out[2] = strtok(NULL, ", ");
         return out;
