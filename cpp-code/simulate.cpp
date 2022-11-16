@@ -69,7 +69,29 @@ int main()
         }
       } 
       else if (output[0] == "UPDATE") {
-        
+        // Create a new event
+        int ParticipantPosition = 0;
+        cout << "Reached 1" << endl;
+        ParticipantPosition = SearchParticipant(output[2], P);
+        cout << "Reached 2: ParticipantPosition: " << ParticipantPosition << endl;
+        if (ParticipantPosition > 0)
+        {
+          // Participant P3 = P[ParticipantPosition];
+          // // Print P3 
+          // cout << "P3: " << P3.participantID << ", " << P3.participantName << ", " << P3.universityName << endl;
+          cout << "Reached 3" << endl;
+          Event E = Event(output[3]);
+          int EventPosition =0;
+          EventPosition = A.SearchInHeap(&E);
+          cout << "Reached Update: Event Position in Heap: " << EventPosition << endl;
+          if (EventPosition > 0)
+          {
+            A.A[EventPosition].A->UpdateScore(stoi(output[4]), &P[ParticipantPosition]);
+          }
+          A.UpdateKey(&E);
+          A.downHeapBubble(EventPosition);
+				  A.upHeapBubble(EventPosition);
+        }
       }
 
       delete[] array;
