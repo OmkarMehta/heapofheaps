@@ -181,7 +181,8 @@ public:
         }
         catch (const char *msg)
         {
-            cout << msg << endl;
+            cout << "Event not found in the heap of heaps" << endl;
+            // cout << msg << endl;
         }
         if (position > 0)
         {
@@ -206,6 +207,7 @@ public:
                 return i;
             }
         }
+        cout << "Event not found in the heap of heaps" << endl;
         throw "Event not found in the heap of heaps";
         return -1;
     }
