@@ -1,6 +1,7 @@
 #pragma once
+#include <cstring>
 #include "Participant.h"
-
+#include "logger.h"
 using namespace std;
 
 class Entry
@@ -126,8 +127,8 @@ void EventMaxHeap::insert(int k, Participant *v)
   // cout << "Position is " << Position << endl;
   if (Position > 0)
   {
-    cout << "Exception in " << __FILE__ << " at line " << __LINE__ << endl;
-    cout << "Participant already exists in the event" << endl;
+    // cout << "Exception in " << __FILE__ << " at line " << __LINE__ << endl;
+    Log(warn, "Participant already exists in the event\n");
     throw "Exception";
   }
   else
@@ -143,8 +144,10 @@ Participant *EventMaxHeap::removeMax()
 {
   if (size == 0)
   {
-    cout << "Exception in " << __FILE__ << " at line " << __LINE__ << endl;
-    throw exception();
+    // cout << "Exception in " << __FILE__ << " at line " << __LINE__ << endl;
+    // cout << "Not any more participants in Event" << endl;
+    const char *a = "Not any more participants in Event";
+    throw a;
   }
   Participant *result = A[1].value;
   if (size == 1)
@@ -165,14 +168,9 @@ Participant *EventMaxHeap::removeMax()
 void EventMaxHeap::removeparticipant(Participant *P)
 {
   int position = 0;
-  try
-  {
-    position = SearchInHeap(P);
-  }
-  catch (exception e)
-  {
-    cout << e.what() << endl;
-  }
+
+  position = SearchInHeap(P);
+
   if (position > 0)
   {
     swapVals(position, size);
@@ -191,8 +189,9 @@ int EventMaxHeap::SearchInHeap(Participant *P)
     if (P->participantID.compare(A[i].value->participantID) == 0)
       return i;
   }
-  cout << "Exception in " << __FILE__ << " at line " << __LINE__ << endl;
-  throw new exception();
+  Log(warn, "Participant not found in requested Event\n");
+  return -1;
+  // throw new exception();
 }
 
 int EventMaxHeap::SearchInHeap1(Participant *P)
@@ -233,7 +232,7 @@ void EventMaxHeap::TOP3INEVENT(EventMaxHeap temp)
     First = temp.removeMax();
     if (first != 0)
     {
-      First->Print();
+      First->PrintForTOP3();
       cout << first << endl;
     }
   }
@@ -253,7 +252,7 @@ void EventMaxHeap::TOP3INEVENT(EventMaxHeap temp)
     Second = temp.removeMax();
     if (second != 0)
     {
-      Second->Print();
+      Second->PrintForTOP3();
       cout << second << endl;
     }
   }
@@ -276,7 +275,7 @@ void EventMaxHeap::TOP3INEVENT(EventMaxHeap temp)
     Third = temp.removeMax();
     if (third != 0)
     {
-      Third->Print();
+      Third->PrintForTOP3();
       cout << third << endl;
     }
   }

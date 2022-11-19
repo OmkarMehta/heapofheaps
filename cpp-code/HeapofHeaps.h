@@ -1,6 +1,8 @@
 
 #include "Event.h"
 #include "EventMaxHeap.h"
+#include "logger.h"
+
 using namespace std;
 class Entry1
 {
@@ -119,7 +121,7 @@ public:
         if (position > 0)
         {
             // throw exception
-            cout << "Event already exists in the heap of heaps" << endl;
+            Log(warn, "Event already exists in the heap of heaps\n");
         }
         EventMaxHeap *O = new EventMaxHeap();
         Participant *P = new Participant("Dummy");
@@ -142,15 +144,10 @@ public:
     void UpdateKey(Event *E)
     {
         int Position = 0;
-        try
-        {
-            Position = SearchInHeap(E);
-        }
-        catch (const char *msg)
-        {
-            cout << msg << endl;
-        }
-        A[Position].key = A[Position].A->A[1].key;
+
+        Position = SearchInHeap(E);
+        if (Position > 0)
+            A[Position].key = A[Position].A->A[1].key;
     }
 
     // This method removes the maximum element from the heap of heaps
@@ -175,15 +172,9 @@ public:
     void removeevent(Event *P)
     {
         int position = 0;
-        try
-        {
-            position = SearchInHeap(P);
-        }
-        catch (const char *msg)
-        {
-            cout << "Event not found in the heap of heaps" << endl;
-            // cout << msg << endl;
-        }
+
+        position = SearchInHeap(P);
+
         if (position > 0)
         {
             if (size == 1)
@@ -207,8 +198,9 @@ public:
                 return i;
             }
         }
-        cout << "Event not found in the heap of heaps" << endl;
-        throw "Event not found in the heap of heaps";
+        Log(warn, "Event not found in the heap of heaps\n");
+
+        // throw "Event not found in the heap of heaps";
         return -1;
     }
 
@@ -229,14 +221,9 @@ public:
     {
         // Search for Event in Heap
         int EventPosition = 0;
-        try
-        {
-            EventPosition = SearchInHeap(E1);
-        }
-        catch (const char *msg)
-        {
-            cout << msg << endl;
-        }
+
+        EventPosition = SearchInHeap(E1);
+
         if (EventPosition > 0)
         {
             A[EventPosition].A->removeparticipant(P1);
@@ -265,7 +252,8 @@ public:
 
     void TOP3()
     {
-        cout << "Top3 of HeapofHeaps:" << endl;
+        // cout << "Top3 of HeapofHeaps:" << endl;
+        Log(info, "Top3 of HeapofHeaps:");
         int first = A[1].key;
         int PO = 0;
         Participant *First = new Participant("Dummy");
@@ -277,12 +265,13 @@ public:
             if (first != 0)
             {
                 First->PrintForTOP3();
-                cout << A[1].value->eventID << ", " << A[1].value->eventName << ", " << first<<endl;
+                cout << A[1].value->eventID << ", " << A[1].value->eventName << ", " << first << endl;
             }
         }
         catch (const char *msg)
         {
             PO = 1;
+
             cout << msg << endl;
             return;
         }
@@ -305,25 +294,15 @@ public:
         catch (const char *msg)
         {
             PO = 1;
-            try
-            {
-                FEventPosition = SearchInHeap(FEvent);
-            }
-            catch (const char *msg)
-            {
-                cout << msg << endl;
-            }
-            try
+
+            FEventPosition = SearchInHeap(FEvent);
+            if (FEventPosition > 0)
             {
                 A[FEventPosition].A->insert(first, First);
+                UpdateKey(FEvent);
+                downHeapBubble(FEventPosition);
+                upHeapBubble(FEventPosition);
             }
-            catch (const char *msg)
-            {
-                cout << msg << endl;
-            }
-            UpdateKey(FEvent);
-            downHeapBubble(FEventPosition);
-            upHeapBubble(FEventPosition);
             cout << msg << endl;
             return;
         }
@@ -345,44 +324,23 @@ public:
         catch (const char *msg)
         {
             PO = 1;
-            try
+
+            FEventPosition = SearchInHeap(FEvent);
+            if (FEventPosition > 0)
             {
-                FEventPosition = SearchInHeap(FEvent);
                 UpdateKey(FEvent);
                 downHeapBubble(FEventPosition);
                 upHeapBubble(FEventPosition);
-            }
-            catch (const char *msg)
-            {
-                cout << msg << endl;
-            }
-            try
-            {
                 A[FEventPosition].A->insert(first, First);
-            }
-            catch (const char *msg)
-            {
-                cout << msg << endl;
-            }
-            try
-            {
                 SEventPosition = SearchInHeap(SEvent);
+                if (SEventPosition > 0)
+                {
+                    A[SEventPosition].A->insert(second, Second);
+                    UpdateKey(SEvent);
+                    downHeapBubble(SEventPosition);
+                    upHeapBubble(SEventPosition);
+                }
             }
-            catch (const char *msg)
-            {
-                cout << msg << endl;
-            }
-            try
-            {
-                A[SEventPosition].A->insert(second, Second);
-            }
-            catch (const char *msg)
-            {
-                cout << msg << endl;
-            }
-            UpdateKey(SEvent);
-            downHeapBubble(SEventPosition);
-            upHeapBubble(SEventPosition);
             cout << msg << endl;
             return;
         }
@@ -398,44 +356,25 @@ public:
             }
             UpdateKey(TEvent);
             downHeapBubble(1);
-            try
+
+            FEventPosition = SearchInHeap(FEvent);
+            if (FEventPosition > 0)
             {
-                FEventPosition = SearchInHeap(FEvent);
-            }
-            catch (const char *msg)
-            {
-                cout << msg << endl;
-            }
-            try
-            {
+
                 A[FEventPosition].A->insert(first, First);
-            }
-            catch (const char *msg)
-            {
-                cout << msg << endl;
-            }
-            UpdateKey(FEvent);
-            downHeapBubble(FEventPosition);
-            upHeapBubble(FEventPosition);
-            try
-            {
+                UpdateKey(FEvent);
+                downHeapBubble(FEventPosition);
+                upHeapBubble(FEventPosition);
                 SEventPosition = SearchInHeap(SEvent);
+                if (SEventPosition > 0)
+                {
+                    A[SEventPosition].A->insert(second, Second);
+
+                    UpdateKey(SEvent);
+                    downHeapBubble(SEventPosition);
+                    upHeapBubble(SEventPosition);
+                }
             }
-            catch (const char *msg)
-            {
-                cout << msg << endl;
-            }
-            try
-            {
-                A[SEventPosition].A->insert(second, Second);
-            }
-            catch (const char *msg)
-            {
-                cout << msg << endl;
-            }
-            UpdateKey(SEvent);
-            downHeapBubble(SEventPosition);
-            upHeapBubble(SEventPosition);
         }
     }
 };
