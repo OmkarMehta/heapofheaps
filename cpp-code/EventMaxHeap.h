@@ -12,8 +12,9 @@ public:
   Entry(int k, Participant *v);
   Entry();
 };
+// constructor
 Entry::Entry() {}
-
+// constructor
 Entry::Entry(int k, Participant *v)
 {
   key = k;
@@ -43,6 +44,7 @@ public:
   void TOP3INEVENT(EventMaxHeap temp);
 };
 
+// constructor
 EventMaxHeap::EventMaxHeap()
 {
   size = 0;
@@ -97,7 +99,7 @@ void EventMaxHeap::upHeapBubble(int i)
 // This method implements the down heap bubble
 void EventMaxHeap::downHeapBubble(int i)
 {
-  int k = 0;
+  int k = 0; // flag to decide if need to swap and downHeap again
   if (2 * i <= size)
   {
     if (A[i].key < A[2 * i].key)
@@ -110,12 +112,17 @@ void EventMaxHeap::downHeapBubble(int i)
   }
   if (k == 1)
   {
-
+    // find greater of the 2 children
     int greatestbit;
-    if (A[2 * i].key > A[2 * i + 1].key)
-      greatestbit = 2 * i;
+    if (2 * i + 1 <= size)
+    {
+      if (A[2 * i].key > A[2 * i + 1].key)
+        greatestbit = 2 * i;
+      else
+        greatestbit = 2 * i + 1;
+    }
     else
-      greatestbit = 2 * i + 1;
+      greatestbit = 2 * i;
     swapVals(i, greatestbit);
     downHeapBubble(greatestbit);
   }
@@ -218,6 +225,7 @@ void EventMaxHeap::UpdateScore(int key, Participant *P)
 {
   int Position = SearchInHeap(P);
   A[Position].key = key;
+  // maintain heap structure
   downHeapBubble(Position);
   upHeapBubble(Position);
 }

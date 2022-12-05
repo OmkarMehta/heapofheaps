@@ -10,6 +10,7 @@ public:
     int key;
     Event *value;
     EventMaxHeap *A;
+    // constructor
     Entry1(int k, Event *v)
     {
         key = k;
@@ -26,6 +27,7 @@ public:
     static const int MAX_HEAP_SIZE1 = 1000;
     Entry1 *A;
     int size;
+    // constructor
     HeapofHeaps()
     {
         A = new Entry1[MAX_HEAP_SIZE1 + 1];
@@ -172,9 +174,7 @@ public:
     void removeevent(Event *P)
     {
         int position = 0;
-
         position = SearchInHeap(P);
-
         if (position > 0)
         {
             if (size == 1)
@@ -189,6 +189,7 @@ public:
         }
     }
 
+    // This method returns warning
     int SearchInHeap(Event *P)
     {
         for (int i = 1; i <= size; i++)
@@ -199,11 +200,9 @@ public:
             }
         }
         Log(warn, "Event not found in the heap of heaps\n");
-
-        // throw "Event not found in the heap of heaps";
         return -1;
     }
-
+    // This method does not returns warning
     int SearchInHeap1(Event *P)
     {
         for (int i = 1; i <= size; i++)
@@ -228,7 +227,9 @@ public:
         {
             A[EventPosition].A->removeparticipant(P1);
             UpdateKey(E1);
+
             downHeapBubble(EventPosition);
+            // Need not do upHeapBubble because removing participant will always decrease score.
         }
     }
 
@@ -241,6 +242,7 @@ public:
         }
     }
 
+    // Used for debugging
     void printArray()
     {
         for (int i = 1; i <= size; i++)
@@ -255,7 +257,7 @@ public:
         // cout << "Top3 of HeapofHeaps:" << endl;
         Log(info, "Top3 of HeapofHeaps:");
         int first = A[1].key;
-        int PO = 0;
+        int PO = 0; // Signifies if error has been caught
         Participant *First = new Participant("Dummy");
         Event *FEvent = A[1].value;
         try
@@ -264,17 +266,17 @@ public:
             UpdateKey(A[1].value);
             if (first != 0)
             {
-                First->PrintForTOP3();
+                First->PrintForTOP3(); // Custom print for legibility
                 cout << A[1].value->eventID << ", " << A[1].value->eventName << ", " << first << endl;
             }
         }
         catch (const char *msg)
         {
             PO = 1;
-
             cout << msg << endl;
             return;
         }
+        // Since key of first Event is updated
         downHeapBubble(1);
         int FEventPosition = 0;
         Participant *Second = new Participant("Dummy");
@@ -291,9 +293,9 @@ public:
                 cout << A[1].value->eventID << ", " << A[1].value->eventName << ", " << second << endl;
             }
         }
-        catch (const char *msg)
+        catch (const char *msg) // If removeMax throws an error
         {
-            PO = 1;
+            PO = 1; // Set flag for error thrown
 
             FEventPosition = SearchInHeap(FEvent);
             if (FEventPosition > 0)
@@ -309,6 +311,7 @@ public:
         Event *SEvent = A[1].value;
         UpdateKey(A[1].value);
         downHeapBubble(1);
+
         int SEventPosition = 0;
         third = A[1].key;
         Event *TEvent = A[1].value;
@@ -321,10 +324,9 @@ public:
                 cout << A[1].value->eventID << ", " << A[1].value->eventName << ", " << third << endl;
             }
         }
-        catch (const char *msg)
+        catch (const char *msg) // If removeMax throws an error
         {
             PO = 1;
-
             FEventPosition = SearchInHeap(FEvent);
             if (FEventPosition > 0)
             {
@@ -344,7 +346,7 @@ public:
             cout << msg << endl;
             return;
         }
-        if (PO == 0)
+        if (PO == 0) // Error was never caught (i.e. 3 participants exist)
         {
             try
             {

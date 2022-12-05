@@ -11,6 +11,7 @@ public:
   Event();
 };
 
+// constructor
 Event::Event(string x, string y, string z)
 {
   eventID = x;
@@ -18,6 +19,7 @@ Event::Event(string x, string y, string z)
   eventDescription = z;
 }
 
+// constructor
 Event::Event(string x)
 {
   eventID = x;
@@ -25,4 +27,5 @@ Event::Event(string x)
   eventDescription = "Default";
 }
 
+// constructor
 Event::Event() {}

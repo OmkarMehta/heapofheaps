@@ -15,16 +15,16 @@ public:
   void Print();
   void PrintForTOP3();
 };
-
+// constructor
 Participant::Participant() {}
-
+// constructor
 Participant::Participant(string x, string y, string z)
 {
   participantID = x;
   participantName = y;
   universityName = z;
 }
-
+// constructor
 Participant::Participant(string x)
 {
   participantID = x;
